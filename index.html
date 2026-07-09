@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Current Affairs VVIP Test</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background:#f4f6f9;
+    margin:0;
+    padding:20px;
+}
+
+.container{
+    max-width:1000px;
+    margin:auto;
+    background:white;
+    padding:25px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+h1{
+    text-align:center;
+    color:#2c3e50;
+}
+
+.question{
+    margin-bottom:25px;
+    padding:15px;
+    border-left:5px solid #3498db;
+    background:#fafafa;
+    position: relative;
+    border-radius: 0 5px 5px 0;
+}
+
+.question p{
+    font-weight:bold;
+}
+
+.options label{
+    display:block;
+    margin:6px 0;
+    cursor:pointer;
+    padding:4px;
+    border-radius:4px;
+}
+
+button{
+    display:block;
+    margin:30px auto;
+    padding:12px 30px;
+    font-size:18px;
+    border:none;
+    background:#27ae60;
+    color:white;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#219150;
+}
+
+#result{
+    margin-top:30px;
+    padding:20px;
+    background:#eef9ee;
+    border:1px solid #27ae60;
+    display:none;
+}
+
+.correct{
+    color:green;
+    font-weight:bold;
+}
+
+.wrong{
+    color:red;
+    font-weight:bold;
+}
+
+.instant-feedback {
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 15px;
+}
+</style>
+</head>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+<script>
+  window.addEventListener("load", function () {
+      alert("this website is owned by shresth3125");
+  });
+</script>
+
+<body>
+
+<div class="container">
+
+<h1>Current Affairs VVIP Test (124 Questions)</h1>
+
+<form id="quizForm"></form>
+
+<div class="rainbow-button-wrapper">
+  <button type="button" id="submitBtn" onclick="submitQuiz()">
+      🚀 Want to Submit Test Samridhi? Click here 
+  </button>
+</div>
+
+<div id="result"></div>
+
+</div>
+
+<script>
+
+const questions = [
+{
+q:"1. Where is the PM MITRA Mega Textile Park being established as mentioned in the notes?",
+type:"single",
+options:["A. Surat, Gujarat","B. Warangal, Telangana","C. Coimbatore, Tamil Nadu","D. Ludhiana, Punjab"],
+answer:"B. Warangal, Telangana"
+},
+{
+q:"2. Where is India’s 1st Rock Check Dam constructed?",
+type:"single",
+options:["A. Shimla, Himachal Pradesh","B. Dehradun, Uttarakhand","C. Upshi, Leh Ladakh","D. Tawang, Arunachal Pradesh"],
+answer:"C. Upshi, Leh Ladakh"
+},
+{
+q:"3. Which region in Rajasthan is noted for its gas reserves?",
+type:"single",
+options:["A. Pokhran","B. Dandewala","C. Jodhpur","D. Barmer"],
+answer:"B. Dandewala"
+},
+{
+q:"4. Who has been appointed as the Chairperson of the High-level Committee on Demographic Change?",
+type:"single",
+options:["A. Justice Prakash Prabhakar Naidu","B. Justice Minakshi Madan Rai","C. Tushar Mehta","D. Duggubati Purandeshwari"],
+answer:"A. Justice Prakash Prabhakar Naidu"
+},
+{
+q:"5. What is the theme for the International Day of Yoga / Yoga Mahotsav celebrated in Khajuraho, MP?",
+type:"single",
+options:["A. Yoga for Vasudhaiva Kutumbakam","B. Yoga for Harmony and Peace","C. Yoga for healthy aging","D. Yoga for Humanity"],
+answer:"C. Yoga for healthy aging"
+},
+{
+q:"6. Who is the Chairperson of the Committee on Empowerment of Women?",
+type:"single",
+options:["A. Smriti Irani","B. Duggubati Purandeshwari","C. Nirmala Sitharaman","D. Jaya Thakur"],
+answer:"B. Duggubati Purandeshwari"
+},
+{
+q:"7. Which state holds the distinction of having the 1st fully paperless judiciary?",
+type:"single",
+options:["A. Kerala","B. Sikkim","C. Goa","D. Tripura"],
+answer:"B. Sikkim"
+},
+{
+q:"8. Where is India's 1st Geothermal Power Plant being set up?",
+type:"single",
+options:["A. Manikaran, Himachal Pradesh","B. Puga Valley, Ladakh","C. Tuwa, Gujarat","D. Khammam, Telangana"],
+answer:"B. Puga Valley, Ladakh"
+},
+{
+q:"9. Where is the 100th Near Crew Post Office of India located?",
+type:"single",
+options:["A. NEIGRIHMS Shillong","B. NEHU Shillong","C. IIT Guwahati","D. NIT Silchar"],
+answer:"B. NEHU Shillong"
+},
+{
+q:"10. Where is India’s 1st Pearl Farming Cluster developed?",
+type:"single",
+options:["A. Tuticorin, Tamil Nadu","B. Hazaribagh, Jharkhand","C. Kochi, Kerala","D. Bhubaneswar, Odisha"],
+answer:"B. Hazaribagh, Jharkhand"
+},
+{
+q:"11. Which nuclear facility is recognized as the 1st Nuclear Power Plant in the Arab world?",
+type:"single",
+options:["A. Barakah Nuclear Power Plant","B. Bushehr Nuclear Plant","C. El Dabaa Nuclear Plant","D. Al-Amal Power Station"],
+answer:"A. Barakah Nuclear Power Plant"
+},
+{
+q:"12. The United States launched the \"Freedom Project\" to secure free transit through which vital maritime choke point?",
+type:"single",
+options:["A. Strait of Malacca","B. Strait of Gibraltar","C. Strait of Hormuz","D. Bab-el-Mandeb"],
+answer:"C. Strait of Hormuz"
+},
+{
+q:"13. Which European country officially withdrew from the Ottawa Convention on 20 February 2026?",
+type:"single",
+options:["A. Ukraine","B. Poland","C. Hungary","D. Belarus"],
+answer:"B. Poland"
+},
+{
+q:"14. PM Modi presented traditional items including Hajipur Mal Bhog Banana, Brimila Makhana, and Madhubani Painting as gifts to To Lam, the President of which nation?",
+type:"single",
+options:["A. UAE","B. Netherlands","C. Vietnam","D. Sweden"],
+answer:"C. Vietnam"
+},
+{
+q:"15. The Port of Fujairah, mentioned in PM Modi's diplomatic gifts/visits context, is situated in the Gulf of Oman belonging to which country?",
+type:"single",
+options:["A. Oman","B. UAE","C. Saudi Arabia","D. Qatar"],
+answer:"B. UAE"
+},
+{
+q:"16. Which country conferred the \"Royal Order of the Polar Star, Degree Commander\" honour?",
+type:"single",
+options:["A. Norway","B. Denmark","C. Sweden","D. Italy"],
+answer:"C. Sweden"
+},
+{
+q:"17. Which two nations have designated the year 2027 as the \"Year of Culture & Tourism\"?",
+type:"single",
+options:["A. India & France","B. India & Italy","C. India & Japan","D. India & Spain"],
+answer:"B. India & Italy"
+},
+{
+q:"18. Where was the 3rd India-Nordic Summit held in May 2026?",
+type:"single",
+options:["A. Stockholm, Sweden","B. Oslo, Norway","C. Kolkata, West Bengal","D. New Delhi"],
+answer:"C. Kolkata, West Bengal"
+},
+{
+q:"19. Match the correct agricultural mission with its respective state location from the notes:",
+type:"single",
+options:["A. Kiwi Mission -> Nagaland","B. Coffee Mission -> Arunachal Pradesh","C. Mission Muga -> Nagaland","D. Ginger Cultivation -> Assam"],
+answer:"C. Mission Muga -> Nagaland"
+},
+{
+q:"20. Which state is famous for the GI-tagged \"Queen Pineapples\"?",
+type:"single",
+options:["A. Assam","B. Tripura","C. Manipur","D. Mizoram"],
+answer:"B. Tripura"
+},
+{
+q:"21. The milestone legal judgment recognizing Menstrual Health as a Fundamental Right was delivered in which case?",
+type:"single",
+options:["A. Shreya Singhal Case","B. Navtej Singh Johar Case","C. Jaya Thakur Case","D. Joseph Shine Case"],
+answer:"C. Jaya Thakur Case"
+},
+{
+q:"22. Where was the 10th edition of the Indian Ocean Dialogue hosted?",
+type:"single",
+options:["A. Mauritius","B. New Delhi","C. Colombo","D. Perth"],
+answer:"B. New Delhi"
+},
+{
+q:"23. Where were the National Tribal Cultural Conclave and the Governance Summit 2026 organized?",
+type:"single",
+options:["A. Ranchi","B. Delhi","C. Raipur","D. Bhubaneswar"],
+answer:"B. Delhi"
+},
+{
+q:"24. Where was the 2nd India Aircraft Leasing & Financing event organized?",
+type:"single",
+options:["A. Mumbai","B. GIFT City, Gujarat","C. New Delhi","D. Hyderabad"],
+answer:"B. GIFT City, Gujarat"
+},
+{
+q:"25. Where was the \"Fruit Horizon 2026\" event held?",
+type:"single",
+options:["A. Nagpur","B. Lucknow","C. Shimla","D. Nashik"],
+answer:"B. Lucknow"
+},
+{
+q:"26. Which Union Ministry launched the \"Common Landing Portal\" for finance?",
+type:"single",
+options:["A. Ministry of Corporate Affairs","B. Ministry of Finance","C. Ministry of Commerce and Industry","D. Ministry of Home Affairs"],
+answer:"B. Ministry of Finance"
+},
+{
+q:"27. The \"Central Prabhari Officer\" portal was launched under the aegis of which organization?",
+type:"single",
+options:["A. RBI","B. SEBI","C. NITI Aayog","D. EPFO"],
+answer:"C. NITI Aayog"
+},
+{
+q:"28. Where is the Indian Railway Innovation Centre established?",
+type:"single",
+options:["A. Bengaluru","B. Hyderabad","C. New Delhi","D. Pune"],
+answer:"B. Hyderabad"
+},
+{
+q:"29. What is \"PRASHAST 200\", developed by NCERT?",
+type:"single",
+options:["A. A teacher training framework","B. A digital portal for screening special children","C. A rural literacy initiative","D. A science talent hunt portal"],
+answer:"B. A digital portal for screening special children"
+},
+{
+q:"30. Which portal is associated with real-time tracking and automation for EPFO?",
+type:"single",
+options:["A. e-SHRAM","B. e-PRAPTI","C. JAL PARAV","D. CHIRAG"],
+answer:"B. e-PRAPTI"
+},
+{
+q:"31. India's first Special Economic Zone (SEZ) developed by an Urban Local Body is located at:",
+type:"single",
+options:["A. Thattanchavady Village, Puducherry","B. Khavda, Gujarat","C. Bhiwadi, Rajasthan","D. Thoothukudi, Tamil Nadu"],
+answer:"A. Thattanchavady Village, Puducherry"
+},
+{
+q:"32. Who published the report titled \"Future of India's Semiconductor Industry: Roadmap\"?",
+type:"single",
+options:["A. Ministry of Electronics and IT (MeitY)","B. NITI Aayog","C. ISRO","D. IISc Bengaluru"],
+answer:"B. NITI Aayog"
+},
+{
+q:"33. What historical highest surplus transfer did the Reserve Bank of India (RBI) announce for the Central Government?",
+type:"single",
+options:["A. ₹2.11 Lakh Crore","B. ₹1.93 Lakh Crore","C. ₹2.87 Lakh Crore","D. ₹3.10 Lakh Crore"],
+answer:"C. ₹2.87 Lakh Crore"
+},
+{
+q:"34. By what percentage did the RBI's income grow in FY 2025-26?",
+type:"single",
+options:["A. 15.23%","B. 20.12%","C. 26.42%","D. 31.85%"],
+answer:"C. 26.42%"
+},
+{
+q:"35. Where is India’s 1st Mega Greenfield Shipyard being built under the Ministry of Ports, Shipping and Waterways?",
+type:"single",
+options:["A. Thoothukudi, Tamil Nadu","B. Visakhapatnam, Andhra Pradesh","C. Kochi, Kerala","D. Kandla, Gujarat"],
+answer:"A. Thoothukudi, Tamil Nadu"
+},
+{
+q:"36. Which initiative was launched by MeitY to support tech intellectual property commercialization?",
+type:"single",
+options:["A. IP Catalyst","B. PRASHAST","C. GARUDA","D. CHIRAG"],
+answer:"A. IP Catalyst"
+},
+{
+q:"37. Which stock exchange launched Electronic Gold Receipts (EGRs) as mentioned in your notes?",
+type:"single",
+options:["A. BSE","B. NSE","C. MCX","D. NCDEX"],
+answer:"B. NSE"
+},
+{
+q:"38. Where did ICICI Bank launch India's 1st \"Phygital\" banking branch?",
+type:"single",
+options:["A. Bengaluru","B. Mumbai","C. Hyderabad","D. New Delhi"],
+answer:"C. Hyderabad"
+},
+{
+q:"39. Where is the world’s largest single-location renewable energy park being built?",
+type:"single",
+options:["A. Pokhran, Rajasthan","B. Khavda, Gujarat","C. Leh, Ladakh","D. Kurnool, Andhra Pradesh"],
+answer:"B. Khavda, Gujarat"
+},
+{
+q:"40. What is the name of the AI-powered initiative launched by SEBI for cybersecurity surveillance?",
+type:"single",
+options:["A. SURAKSHA AI / GARUDA initiative","B. PRAPTI AI","C. CHIRAG AI","D. NIRBHAY RAHO"],
+answer:"A. SURAKSHA AI / GARUDA initiative"
+},
+{
+q:"41. Which state leads in marine fisheries production in India according to the notes?",
+type:"single",
+options:["A. Kerala","B. Gujarat","C. Tamil Nadu","D. Andhra Pradesh"],
+answer:"C. Tamil Nadu"
+},
+{
+q:"42. What is \"Mission Dristi\", recently in the news?",
+type:"single",
+options:["A. India's deep-sea exploration vehicle","B. India's largest privately developed Earth Observation Opto-SAR Satellite","C. A missile defense system","D. A solar observation mission"],
+answer:"B. India's largest privately developed Earth Observation Opto-SAR Satellite"
+},
+{
+q:"43. The therapeutic drug \"Semaglutide\" is primary used for the management of which health condition?",
+type:"single",
+options:["A. Sickle Cell Disease","B. Type 2 Diabetes","C. Polycystic Ovary Syndrome (PCOS)","D. Hypertension"],
+answer:"B. Type 2 Diabetes"
+},
+{
+q:"44. Under \"Mission Mausam\", where has India's 1st Sky Rad System been installed?",
+type:"single",
+options:["A. IITM Pune","B. IGI Airport, New Delhi","C. Hanley, Ladakh","D. ISRO Bengaluru"],
+answer:"B. IGI Airport, New Delhi"
+},
+{
+q:"45. What is the \"Loktak Protocluster\" discovered by astronomers?",
+type:"single",
+options:["A. Network of deep-sea trenches","B. Primitive cluster of galaxies","C. Group of newly found exoplanets","D. Cluster of volcanic islands"],
+answer:"B. Primitive cluster of galaxies"
+},
+{
+q:"46. What does the acronym \"CLEAR\" stand for in medical technology notes?",
+type:"single",
+options:["A. Cleavable Liquid Erased Antibody Reporter","B. Cellular Luminescent Electron Active Receptor","C. Controlled Laser Erased Antigen Remainder","D. Chemically Luminescent Engineered Antibody Response"],
+answer:"A. Cleavable Liquid Erased Antibody Reporter"
+},
+{
+q:"47. What type of scientific platform is \"VISTA\"?",
+type:"single",
+options:["A. Deep-sea exploration submarine","B. Stratospheric super pressure balloon","C. Orbital hyper-spectral camera","D. Underground neutrino detector"],
+answer:"B. Stratospheric super pressure balloon"
+},
+{
+q:"48. What is \"BIRSA\" developed in India?",
+type:"single",
+options:["A. India’s first indigenous CRISPR-based gene therapy for Sickle Cell Disease (SCD)","B. India's first indigenous COVID vaccine","C. An AI weather forecasting model","D. A military drone system"],
+answer:"A. India’s first indigenous CRISPR-based gene therapy for Sickle Cell Disease (SCD)"
+},
+{
+q:"49. On which date is National Technology Day celebrated in India?",
+type:"single",
+options:["A. 28 February","B. 11 May","C. 20 May","D. 22 May"],
+answer:"B. 11 May"
+},
+{
+q:"50. What is \"PATH FINDER\", mentioned in the space sector notes?",
+type:"single",
+options:["A. Lunar rover prototype","B. India's 1st orbital data centre satellite","C. Deep-space telemetry antenna","D. Mars orbiter camera"],
+answer:"B. India's 1st orbital data centre satellite"
+},
+{
+q:"51. Where has India's new state-of-the-art Water Tunnel Facility been set up?",
+type:"single",
+options:["A. IIT Bombay","B. IIT Madras","C. IISc Bengaluru","D. IIT Kharagpur"],
+answer:"B. IIT Madras"
+},
+{
+q:"52. Where was the \"Vigyan Team 2026\" conclave convened?",
+type:"single",
+options:["A. Pune","B. Bengaluru","C. New Delhi","D. Chennai"],
+answer:"C. New Delhi"
+},
+{
+q:"53. Where has India’s 1st Urban Testbed & Aerosol Observatory been established?",
+type:"single",
+options:["A. IITM Pune","B. Chennai","C. New Delhi","D. Mumbai"],
+answer:"A. IITM Pune"
+},
+{
+q:"54. According to medical updates, PCOS is a polyendocrine disorder also known as:",
+type:"single",
+options:["A. Secondary Ovarian Deficiency Syndrome","B. Primary Metabolic Ovarian Syndrome (PMOS)","C. Chronic Endocrine Ovarian Disorder","D. Autoimmune Metabolic Ovarian Syndrome"],
+answer:"B. Primary Metabolic Ovarian Syndrome (PMOS)"
+},
+{
+q:"55. Experts from which country are lending technical expertise to Gujarat’s Kalpasar Project at the Gulf of Khambhat?",
+type:"single",
+options:["A. Germany","B. Japan","C. Netherlands","D. France"],
+answer:"C. Netherlands"
+},
+{
+q:"56. Where was India’s 1st satellite-tagged Ganges Softshell Turtle released?",
+type:"single",
+options:["A. Sundarbans National Park","B. Kaziranga National Park","C. Vikramshila Gangetic Dolphin Sanctuary","D. Bhitarkanika National Park"],
+answer:"B. Kaziranga National Park"
+},
+{
+q:"57. Where is India’s 1st Green Methanol Plant being established?",
+type:"single",
+options:["A. Jawaharlal Nehru Port, Maharashtra","B. Deendayal Port Authority, Gujarat","C. Paradip Port, Odisha","D. Visakhapatnam Port, Andhra Pradesh"],
+answer:"B. Deendayal Port Authority, Gujarat"
+},
+{
+q:"58. France has pledged an exit roadmap from fossil fuels under its INDC 2.0. What are the target years mentioned for various fuels?",
+type:"single",
+options:["A. 2030 Coal, 2040 Oil, 2045 Fossil Gas","B. 2030 Coal, 2045 Oil, 2050 Fossil Gas","C. 2028 Coal, 2035 Oil, 2040 Fossil Gas","D. 2035 Coal, 2045 Oil, 2060 Fossil Gas"],
+answer:"B. 2030 Coal, 2045 Oil, 2050 Fossil Gas"
+},
+{
+q:"59. India's 1st Dolphin Rescue Ambulance has been designed and launched by:",
+type:"single",
+options:["A. Wildlife Trust of India, Noida","B. Wildlife Institute of India, Dehradun","C. National Biodiversity Authority, Chennai","D. Central Marine Fisheries Research Institute, Kochi"],
+answer:"B. Wildlife Institute of India, Dehradun"
+},
+{
+q:"60. Where is India’s 1st Algae Rock/Face garden established?",
+type:"single",
+options:["A. Swami Vivekanand Park, Bhopal","B. Sukhna Lake, Chandigarh","C. Cubbon Park, Bengaluru","D. Lodhi Gardens, New Delhi"],
+answer:"A. Swami Vivekanand Park, Bhopal"
+},
+{
+q:"61. Which premier institute has set up India's 1st Integrated CCUS (Carbon Capture, Utilization, and Storage) center?",
+type:"single",
+options:["A. IIT Delhi","B. IIT Madras","C. IIT Bombay","D. IIT Kanpur"],
+answer:"C. IIT Bombay"
+},
+{
+q:"62. What is the designated date for the International Day for Biological Diversity?",
+type:"single",
+options:["A. 20 May","B. 21 May","C. 22 May","D. 31 May"],
+answer:"C. 22 May"
+},
+{
+q:"63. A new plant/animal species named Tachyspermum lalremsangiana was discovered in which national park?",
+type:"single",
+options:["A. Keibul Lamjao National Park, Manipur","B. Murlen National Park, Mizoram","C. Namdapha National Park, Arunachal Pradesh","D. Nokrek National Park, Meghalaya"],
+answer:"B. Murlen National Park, Mizoram"
+},
+{
+q:"64. Where is the \"Nausena Smriti Smarak\" (Indian Naval War Memorial & Museum) being built globally?",
+type:"single",
+options:["A. Singapore","B. Imjingak Park, Seoul, South Korea","C. Tokyo, Japan","D. Port Louis, Mauritius"],
+answer:"B. Imjingak Park, Seoul, South Korea"
+},
+{
+q:"65. What is \"Kaal Bhairav\", which was recently inaugurated by Defence Minister Rajnath Singh?",
+type:"single",
+options:["A. Stealth submarine","B. India's 1st AI-powered autonomous combat aircraft","C. Tactical ballistic missile","D. Anti-drone laser shield"],
+answer:"B. India's 1st AI-powered autonomous combat aircraft"
+},
+{
+q:"66. What type of substance is \"Captagon\", targeted during 'Operation RAGEPILL'?",
+type:"single",
+options:["A. Chemical weapon precursor","B. Illicit stimulant tablet known as \"Jihadi Drug\" or \"Poor man's cocaine\"","C. Banned agricultural pesticide","D. Counterfeit pharmaceutical drug"],
+answer:"B. Illicit stimulant tablet known as \"Jihadi Drug\" or \"Poor man's cocaine\""
+},
+{
+q:"67. Where is the 41st edition of the multilateral military exercise \"PRAGATI 2026\" being hosted by the Indian Army?",
+type:"single",
+options:["A. Mahajan Field Firing Range, Rajasthan","B. Umroi Military Tactical Range Station, Meghalaya","C. Bakloh, Himachal Pradesh","D. Aundh Military Station, Pune"],
+answer:"B. Umroi Military Tactical Range Station, Meghalaya"
+},
+{
+q:"68. What category of military hardware is \"TARA\" (Tactical Ranged Augmentation)?",
+type:"single",
+options:["A. Rocket launcher system","B. Advanced glide weapon system","C. Cruise missile variant","D. Loitering munition drone"],
+answer:"B. Advanced glide weapon system"
+},
+{
+q:"69. Where is India’s 1st Private Sector Marine Gas Turbine Facility established?",
+type:"single",
+options:["A. Mumbai","B. Visakhapatnam","C. Chennai","D. Kochi"],
+answer:"B. Visakhapatnam"
+},
+{
+q:"70. Who became India’s 1st woman Category-A Qualified Flying Instructor?",
+type:"single",
+options:["A. Squadron Leader Avani Chaturvedi","B. Squadron Leader Saanya","C. Squadron Leader Bhawana Kanth","D. Squadron Leader Mohana Singh"],
+answer:"B. Squadron Leader Saanya"
+},
+{
+q:"71. \"RS-28 Sarmat\" is a newly tested Intercontinental Ballistic Missile (ICBM) belonging to which country?",
+type:"single",
+options:["A. China","B. Russia","C. North Korea","D. USA"],
+answer:"B. Russia"
+},
+{
+q:"72. Which organization compiles and publishes the Global Press Freedom Index?",
+type:"single",
+options:["A. Transparency International","B. Reporters Without Borders","C. Amnesty International","D. World Economic Forum"],
+answer:"B. Reporters Without Borders"
+},
+{
+q:"73. What is India's rank in the Henley Passport Index 2026?",
+type:"single",
+options:["A. 80th","B. 85th","C. 78th","D. 82nd"],
+answer:"C. 78th"
+},
+{
+q:"74. Which agency released the \"Global Forest Goals Report 2026\"?",
+type:"single",
+options:["A. UNEP","B. United Nations (UN)","C. WWF","D. IUCN"],
+answer:"B. United Nations (UN)"
+},
+{
+q:"75. India has been placed on the \"Special 301 Priority Watch List\" report issued by which country's trade office?",
+type:"single",
+options:["A. European Union","B. United States Trade Representative (USTR)","C. World Trade Organization","D. United Kingdom"],
+answer:"B. United States Trade Representative (USTR)"
+},
+{
+q:"76. Who won the International Booker Prize 2026 for the book Taiwan Travelogue?",
+type:"single",
+options:["A. Geetanjali Shree","B. Yang Shuang-zi (translated by Lin King)","C. Han Kang","D. Shehan Karunatilaka"],
+answer:"B. Yang Shuang-zi (translated by Lin King)"
+},
+{
+q:"77. Who received the prestigious Whitley Awards 2026 (also known as the Green Oscars) from India for Himalayan Salamander and Indian Skimmer conservation?",
+type:"single",
+options:["A. Purnima Devi Barman","B. Barkha Subba & Parveen Shaikh","C. Dr. Anish Andheria","D. Jadav Payeng"],
+answer:"B. Barkha Subba & Parveen Shaikh"
+},
+{
+q:"78. Which Indian journalists were awarded the Pulitzer Prize 2026?",
+type:"single",
+options:["A. Ravish Kumar & P. Sainath","B. RK Ananda & Suparna Sharma","C. Siddhartha Deb & Rana Ayyub","D. Barkha Dutt & Rajdeep Sardesai"],
+answer:"B. RK Ananda & Suparna Sharma"
+},
+{
+q:"79. Which specialized international body awarded the prestigious \"Agricola Medal\" to PM Narendra Modi?",
+type:"single",
+options:["A. World Health Organization (WHO)","B. Food & Agriculture Organization (FAO)","C. UNESCO","D. UNDP"],
+answer:"B. Food & Agriculture Organization (FAO)"
+},
+{
+q:"80. Where was the Global Water Summit 2026 hosted?",
+type:"single",
+options:["A. Geneva, Switzerland","B. Madrid, Spain","C. Stockholm, Sweden","D. Paris, France"],
+answer:"B. Madrid, Spain"
+},
+{
+q:"81. PM Modi was conferred the prestigious \"Order of Mapungubwe\" by which country?",
+type:"single",
+options:["A. Egypt","B. South Africa","C. Bhutan","D. France"],
+answer:"B. South Africa"
+},
+{
+q:"82. Who holds the record as the \"Everest Man\" for climbing Mt. Everest the highest number of times?",
+type:"single",
+options:["A. Lhakpa Sherpa","B. Kami Rita Sherpa","C. Tenzing Norgay","D. Babu Chiri Sherpa"],
+answer:"B. Kami Rita Sherpa"
+},
+{
+q:"83. Who won the UEFA Champions League 2026 final as mentioned in the notes?",
+type:"single",
+options:["A. Real Madrid","B. Arsenal","C. Manchester City","D. Barcelona"],
+answer:"B. Arsenal"
+},
+{
+q:"84. In the Indian Super League (ISL), which team did East Bengal defeat?",
+type:"single",
+options:["A. Mohun Bagan","B. Inter Kashi","C. Mumbai City FC","D. Bengaluru FC"],
+answer:"B. Inter Kashi"
+},
+{
+q:"85. Who has been hailed as the \"Commonwealth Messi of Chess\"?",
+type:"single",
+options:["A. R Praggnanandhaa","B. Faustino Oro","C. D Gukesh","D. Arjun Erigaisi"],
+answer:"B. Faustino Oro"
+},
+{
+q:"86. Who has been appointed as the new Deputy Governor of the Reserve Bank of India (RBI)?",
+type:"single",
+options:["A. Swaminathan Janakiraman","B. Rohit Jain","C. Michael Patra","D. M. Rajeshwar Rao"],
+answer:"B. Rohit Jain"
+},
+{
+q:"87. According to the Election Commission of India (ECI), which state is identified as the \"most rapidly aging state\" in India?",
+type:"single",
+options:["A. Tamil Nadu","B. Kerala","C. West Bengal","D. Goa"],
+answer:"B. Kerala"
+},
+{
+q:"88. On which date did Goa celebrate its Statehood Day in 2026?",
+type:"single",
+options:["A. 16 May","B. 30 May","C. 9 May","D. 24 May"],
+answer:"B. 30 May"
+},
+{
+q:"89. Which state celebrated its Statehood Day on 16 May?",
+type:"single",
+options:["A. Goa","B. Sikkim","C. Mizoram","D. Arunachal Pradesh"],
+answer:"B. Sikkim"
+},
+{
+q:"90. Where is Rajasthan’s 1st dedicated Semiconductor Cluster being developed?",
+type:"single",
+options:["A. Neemrana, Alwar","B. Bhiwadi, Alwar","C. Sitapura, Jaipur","D. Boranada, Jodhpur"],
+answer:"B. Bhiwadi, Alwar"
+},
+{
+q:"91. Which state became the 1st to launch the \"Maha Chaturang\" digital governance initiative?",
+type:"single",
+options:["A. Madhya Pradesh","B. Maharashtra","C. Karnataka","D. Uttar Pradesh"],
+answer:"B. Maharashtra"
+},
+{
+q:"92. The \"Not of Standard Quality\" digital portal for tracking sub-standard medicines was launched by:",
+type:"single",
+options:["A. Kerala","B. Haryana","C. Karnataka","D. Gujarat"],
+answer:"B. Haryana"
+},
+{
+q:"93. Which state government developed the \"Shram Mitra App\" to streamline welfare benefits?",
+type:"single",
+options:["A. Delhi","B. Karnataka","C. Kerala","D. Odisha"],
+answer:"B. Karnataka"
+},
+{
+q:"94. \"Operation Chakravyuh\", aimed at rigorous healthcare monitoring/inspections, was executed by which state?",
+type:"single",
+options:["A. Tamil Nadu","B. Kerala","C. Maharashtra","D. Punjab"],
+answer:"B. Kerala"
+},
+{
+q:"95. Which became the 1st Northeast state to implement the Uniform Civil Code (UCC)?",
+type:"single",
+options:["A. Tripura","B. Assam","C. Manipur","D. Meghalaya"],
+answer:"B. Assam"
+},
+{
+q:"96. Which state is recognized as the 1st to complete all digital deregulation protocols?",
+type:"single",
+options:["A. Assam","B. Tripura","C. Sikkim","D. Mizoram"],
+answer:"B. Tripura"
+},
+{
+q:"97. The environmental campaign \"Jal Parav Campaign\" was heavily centered around:",
+type:"single",
+options:["A. Little Rann of Kutch, Gujarat","B. Chilika Lake, Odisha","C. Loktak Lake, Manipur","D. Vembanad Lake, Kerala"],
+answer:"A. Little Rann of Kutch, Gujarat"
+},
+{
+q:"98. Where has the \"Vaman Van Living Classroom\" project been opened for environmental education?",
+type:"single",
+options:["A. Bengaluru","B. Delhi","C. Chandigarh","D. Bhopal"],
+answer:"B. Delhi"
+},
+{
+q:"99. The cultural street carnival \"Nimapara Patha Utsav\" belongs to which state?",
+type:"single",
+options:["A. West Bengal","B. Odisha","C. Jharkhand","D. Bihar"],
+answer:"B. Odisha"
+},
+{
+q:"100. Which state recorded the highest Primary School dropout rate according to the notes?",
+type:"single",
+options:["A. Bihar","B. Gujarat","C. Jharkhand","D. Uttar Pradesh"],
+answer:"B. Gujarat"
+},
+{
+q:"101. Where is the \"Bhimmandali Eco Heritage Site\" located?",
+type:"single",
+options:["A. Jharkhand","B. Odisha","C. Chhattisgarh","D. Madhya Pradesh"],
+answer:"B. Odisha"
+},
+{
+q:"102. Which state launched India's 1st digital grievance redressal application named \"Khured\" specifically tailored for gig workers?",
+type:"single",
+options:["A. Telangana","B. Karnataka","C. Maharashtra","D. Tamil Nadu"],
+answer:"B. Karnataka"
+},
+{
+q:"103. Which state implemented a state-of-the-art Real-Time Disaster Management system?",
+type:"single",
+options:["A. Assam","B. Mizoram","C. Uttarakhand","D. Himachal Pradesh"],
+answer:"B. Mizoram"
+},
+{
+q:"104. Which Gram Panchayat in Bihar was ranked as the Second Best Panchayat nationally?",
+type:"single",
+options:["A. Telkap Gram Panchayat, Rohtas","B. Rajgir Panchayat, Nalanda","C. Anandpur Panchayat, Gaya","D. Kudra Panchayat, Kaimur"],
+answer:"A. Telkap Gram Panchayat, Rohtas"
+},
+{
+q:"105. Where is the branch campus of the National Institute of Food Technology Entrepreneurship and Management (NIFTEM) located in Bihar?",
+type:"single",
+options:["A. Patna","B. Hajipur, Vaishali","C. Muzaffarpur","D. Bhagalpur"],
+answer:"B. Hajipur, Vaishali"
+},
+{
+q:"106. Where is \"Pravaha\", Bihar’s first globally benchmarked multidisciplinary university, being established?",
+type:"single",
+options:["A. Kalyanpur, Patna","B. G. Loma, Vaishali","C. Bihta, Patna","D. Bodh Gaya"],
+answer:"B. G. Loma, Vaishali"
+},
+{
+q:"107. The automated solar-powered project \"ASHA\" was unveiled by Deputy CM Vijay Kumar Choudhary at:",
+type:"single",
+options:["A. Hajipur, Vaishali","B. Kalyanpur, Patna","C. Mithilanchal, Darbhanga","D. Sherghati, Gaya"],
+answer:"B. Kalyanpur, Patna"
+},
+{
+q:"108. Who has taken charge as the 48th Chief Justice of the Patna High Court?",
+type:"single",
+options:["A. Justice Prakash Prabhakar","B. Justice Minakshi Madan Rai","C. Justice K. Vinod Chandran","D. Justice L. Narayana Swamy"],
+answer:"B. Justice Minakshi Madan Rai"
+},
+{
+q:"109. Where has the CISF Regional Training Centre been set up in Bihar?",
+type:"single",
+options:["A. Begusarai","B. Pothia Centre, Kishanganj","C. Barauni, Begusarai","D. Mokama, Patna"],
+answer:"B. Pothia Centre, Kishanganj"
+},
+{
+q:"110. Where is Bihar’s 1st tree-top walkway project being constructed?",
+type:"single",
+options:["A. Valmiki Tiger Reserve, West Champaran","B. Patna Zoo (Sanjay Gandhi Jaivik Udyan)","C. Rajgir Nature Safari, Nalanda","D. Kaimur Wildlife Sanctuary"],
+answer:"B. Patna Zoo (Sanjay Gandhi Jaivik Udyan)"
+},
+{
+q:"111. Where is Bihar's 1st Government Semen Static Station established?",
+type:"single",
+options:["A. Purnia","B. Gaya","C. Muzaffarpur","D. Patna"],
+answer:"B. Gaya"
+},
+{
+q:"112. CBSE has introduced which regional language as a formal subject from Primary to Secondary school levels in Bihar?",
+type:"single",
+options:["A. Bhojpuri","B. Maithili","C. Magahi","D. Angika"],
+answer:"B. Maithili"
+},
+{
+q:"113. Where has the modern Akhand Jyoti Eyecare Hospital been inaugurated?",
+type:"single",
+options:["A. Hajipur, Vaishali","B. Mastichak, Saran","C. Bihta, Patna","D. Sherghati, Gaya"],
+answer:"B. Mastichak, Saran"
+},
+{
+q:"114. What is \"Smriti\", which was unveiled by Home Minister Amit Shah?",
+type:"single",
+options:["A. Digital war memorial app","B. The official AI Anchor of BPSC","C. Portal for judicial land records","D. Rural health screening device"],
+answer:"B. The official AI Anchor of BPSC"
+},
+{
+q:"115. Who authored the books The Bench, the Bar & the Bizarre and The Lawful & the Unlawful?",
+type:"single",
+options:["A. Harish Salve","B. Tushar Mehta","C. Abhishek Manu Singhvi","D. Mukul Rohatgi"],
+answer:"B. Tushar Mehta"
+},
+{
+q:"116. Who authored the book 'How to be Happy' and 'All Time Favorite Friendship Stories'?",
+type:"single",
+options:["A. Narendra Modi","B. Ruskin Bond","C. Kailash Satyarthi","D. K. Arumugam"],
+answer:"B. Ruskin Bond"
+},
+{
+q:"117. Who is the author of Green Coach of Uttarakhand?",
+type:"single",
+options:["A. Bashir Badshah","B. Dharmendra Kumar","C. BC Khanduri","D. Ruskin Bond"],
+answer:"B. Dharmendra Kumar"
+},
+{
+q:"118. Who was the 1st Chairman of the Competition Commission of India (CCI)?",
+type:"single",
+options:["A. Ashok Chawla","B. Dharmendra Kumar","C. Ravneet Kaur","D. Tushar Mehta"],
+answer:"B. Dharmendra Kumar"
+},
+{
+q:"119. What is the theme for International Tea Day (21 May)?",
+type:"single",
+options:["A. Tea and Fair Trade","B. Sustaining tea support for small rare communities","C. Tea for Health and Wellbeing","D. Empowering Women in Tea Sectors"],
+answer:"B. Sustaining tea support for small rare communities"
+},
+{
+q:"120. Rare copper plate inscriptions belonging to the ancient Panduvanshi Dynasty were discovered during excavations at:",
+type:"single",
+options:["A. Sirpur, Chhattisgarh","B. Malhar, Chhattisgarh","C. Rajim, Chhattisgarh","D. Tala, Chhattisgarh"],
+answer:"B. Malhar, Chhattisgarh"
+},
+{
+q:"121. \"Eve\" is a human-looking robot developed by tech firms. What is its description?",
+type:"single",
+options:["A. Deep sea diving robotic probe","B. Humanoid Buddhist Monk robot from South Korea","C. Autonomous surgical assistant robot","D. Military rescue humanoid drone"],
+answer:"B. Humanoid Buddhist Monk robot from South Korea"
+},
+{
+q:"122. What is the theme for International Labour Day 2026?",
+type:"single",
+options:["A. Social Justice for All","B. Ensuring a healthy psychosocial working environment","C. Safety and Health at Work","D. Securing Sustainable Supply Chains"],
+answer:"B. Ensuring a healthy psychosocial working environment"
+},
+{
+q:"123. Which African nation passed a controversial bill criminalizing homosexuality and LGBTQ promotion?",
+type:"single",
+options:["A. Uganda","B. Ghana","C. Kenya","D. Nigeria"],
+answer:"B. Ghana"
+},
+{
+q:"124. When is World No-Tobacco Day observed?",
+type:"single",
+options:["A. 3 May","B. 31 May","C. 20 May","D. 22 May"],
+answer:"B. 31 May"
+}
+];
+
+const form = document.getElementById("quizForm");
+
+// Dynamically render the questions
+questions.forEach((item,index)=>{
+
+let html=`<div class="question" id="qContainer${index}">
+<p>${item.q}</p>
+<div class="options">`;
+
+item.options.forEach(opt=>{
+if(item.type === "single"){
+    html+=`
+    <label>
+    <input type="radio" name="q${index}" value="${opt}" onchange="checkInstantAnswer(${index})">
+    ${opt}
+    </label>`;
+} else {
+    html+=`
+    <label>
+    <input type="checkbox" name="q${index}" value="${opt}" onchange="checkInstantAnswer(${index})">
+    ${opt}
+    </label>`;
+}
+});
+
+html+=`</div>
+<div class="instant-feedback" id="feedback${index}"></div>
+</div>`;
+form.innerHTML+=html;
+});
+
+function arraysEqual(a,b){
+a=[...a].sort();
+b=[...b].sort();
+return JSON.stringify(a)===JSON.stringify(b);
+}
+
+// Evaluate status right after interaction
+function checkInstantAnswer(index) {
+    const q = questions[index];
+    const feedbackDiv = document.getElementById(`feedback${index}`);
+    
+    if (q.type === "single") {
+        let selected = document.querySelector(`input[name="q${index}"]:checked`);
+        if (selected) {
+            if (selected.value === q.answer) {
+                feedbackDiv.innerHTML = `<span class="correct">✔ Correct!</span>`;
+            } else {
+                feedbackDiv.innerHTML = `<span class="wrong">✘ Wrong | Correct Answer: ${q.answer}</span>`;
+            }
+        }
+    } else {
+        let selected = [...document.querySelectorAll(`input[name="q${index}"]:checked`)].map(x => x.value);
+        if (selected.length === 0) {
+            feedbackDiv.innerHTML = "";
+            return;
+        }
+        if (arraysEqual(selected, q.answer)) {
+            feedbackDiv.innerHTML = `<span class="correct">✔ Correct Combination matched!</span>`;
+        } else {
+            feedbackDiv.innerHTML = `<span class="wrong">✘ Combination incomplete or incorrect | Expected answers: ${q.answer.join(", ")}</span>`;
+        }
+    }
+}
+
+function fireResultConfetti() {
+if (typeof confetti !== "function") return;
+const end = Date.now() + 3000;
+
+(function frame() {
+    confetti({ particleCount: 8, angle: 60, spread: 70, origin: { x: 0 } });
+    confetti({ particleCount: 8, angle: 120, spread: 70, origin: { x: 1 } });
+    if (Date.now() < end) { requestAnimationFrame(frame); }
+})();
+}
+
+function submitQuiz(){
+let score=0;
+let output="<h2>Final Summary Report</h2>";
+
+questions.forEach((q,i)=>{
+if(q.type === "single"){
+    let selected=document.querySelector(`input[name="q${i}"]:checked`);
+    if(selected && selected.value===q.answer){
+        score++;
+        output+=`<p class="correct">Q${i+1}: Correct ✔</p>`;
+    } else {
+        output+=`<p class="wrong">Q${i+1}: Wrong ✘ | Correct Answer: ${q.answer}</p>`;
+    }
+} else {
+    let selected=[...document.querySelectorAll(`input[name="q${i}"]:checked`)].map(x=>x.value);
+    if(arraysEqual(selected, q.answer)){
+        score++;
+        output+=`<p class="correct">Q${i+1}: Correct ✔</p>`;
+    }else{
+        output+=`<p class="wrong">Q${i+1}: Wrong ✘ | Correct Answer: ${q.answer.join(", ")}</p>`;
+    }
+}
+});
+
+let percentage=((score/questions.length)*100).toFixed(2);
+
+output+=`
+<hr>
+<h2>Final Score: ${score}/${questions.length}</h2>
+<h2>Percentage: ${percentage}%</h2>
+`;
+
+const result=document.getElementById("result");
+result.style.display="block";
+result.innerHTML=output;
+
+fireResultConfetti();
+
+window.scrollTo({
+top:document.body.scrollHeight,
+behavior:"smooth"
+});
+}
+</script>
+
+</body>
+</html>
